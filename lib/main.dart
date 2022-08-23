@@ -61,6 +61,17 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -95,21 +106,73 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Padding(
+              // 推奨
+              padding: EdgeInsets.all(20),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 40.0,
+                ),
+                Text(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ]),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+
+            // Spacer(flex: 10),
+            Padding(
+              // 推奨
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // OutlinedButton.icon(
+                  //   onPressed: () {},
+                  //   icon: Icon(Icons.favorite, color: Colors.pink),
+                  //   label: Text('Like'),
+                  // ),
+                  // ElevatedButton.icon(
+                  //   onPressed: () {},
+                  //   icon: Icon(Icons.flight),
+                  //   label: Text('Flight'),
+                  // ),
+                  TextButton.icon(
+                    onPressed: _decrementCounter,
+                    icon: Icon(Icons.thumb_down, color: Colors.pink),
+                    label: Text(
+                      'Bad',
+                      style: TextStyle(
+                        color: Colors.pink,
+                      ),
+                    ),
+                  ),
+                  TextButton.icon(
+                    onPressed: _incrementCounter,
+                    icon: Icon(Icons.thumb_up, color: Colors.blue),
+                    label: Text(
+                      'Good',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
+
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
